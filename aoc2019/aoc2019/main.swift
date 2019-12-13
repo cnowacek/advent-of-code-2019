@@ -8,8 +8,7 @@
 
 import Foundation
 
-let intcode: [Int] = [3,8,1001,8,10,8,105,1,0,0,21,46,67,76,101,118,199,280,361,442,99999,3,9,1002,9,4,9,1001,9,2,9,102,3,9,9,101,3,9,9,102,2,9,9,4,9,99,3,9,1001,9,3,9,102,2,9,9,1001,9,2,9,1002,9,3,9,4,9,99,3,9,101,3,9,9,4,9,99,3,9,1001,9,2,9,1002,9,5,9,101,5,9,9,1002,9,4,9,101,5,9,9,4,9,99,3,9,102,2,9,9,1001,9,5,9,102,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99]
-var inputValues = [5]
+//let intcode: [Int] = [3,8,1001,8,10,8,105,1,0,0,21,46,67,76,101,118,199,280,361,442,99999,3,9,1002,9,4,9,1001,9,2,9,102,3,9,9,101,3,9,9,102,2,9,9,4,9,99,3,9,1001,9,3,9,102,2,9,9,1001,9,2,9,1002,9,3,9,4,9,99,3,9,101,3,9,9,4,9,99,3,9,1001,9,2,9,1002,9,5,9,101,5,9,9,1002,9,4,9,101,5,9,9,4,9,99,3,9,102,2,9,9,1001,9,5,9,102,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99]
 
 enum ParamMode {
     case position
@@ -144,6 +143,10 @@ func execute(instruction: Instruction, pointer: Int, memory: inout [Int], input:
         memory[destination] = operand1 * operand2
 
     case .input(let param1):
+        guard let _ = input.first else {
+            print("Waiting for input...")
+            return pointer
+        }
         memory[param1.value] = input.removeFirst()
         break
 
@@ -195,60 +198,101 @@ func execute(instruction: Instruction, pointer: Int, memory: inout [Int], input:
     return pointer + instruction.numValues
 }
 
-public func run(intcode: [Int], input: [Int]) -> [Int] {
-    var ipx = 0
-    var mIntcode = intcode
+// Returns current pointer
+public func run(intcode: inout [Int], input: [Int], output: inout [Int], ipx: Int = 0) -> Int {
+    var ipx = ipx
     var mInput = input
     var mOutput: [Int] = []
     while ipx >= 0 {
-        let instruction = instructionAt(pointer: ipx, program: mIntcode)
-        ipx = execute(instruction: instruction, pointer: ipx, memory: &mIntcode, input: &mInput, output: &mOutput)
+        let instruction = instructionAt(pointer: ipx, program: intcode)
+        ipx = execute(instruction: instruction, pointer: ipx, memory: &intcode, input: &mInput, output: &mOutput)
+        if let _ = mOutput.first {
+            output.append(mOutput.removeFirst())
+            return ipx
+        }
     }
-    return mOutput
+    return -1
 }
-
-
 
 
 func day7() {
     
     var maxThruster = 0
     var phase: [Int] = []
+    let intcode = [3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5]
+    //let intcode: [Int] = [3,8,1001,8,10,8,105,1,0,0,21,46,67,76,101,118,199,280,361,442,99999,3,9,1002,9,4,9,1001,9,2,9,102,3,9,9,101,3,9,9,102,2,9,9,4,9,99,3,9,1001,9,3,9,102,2,9,9,1001,9,2,9,1002,9,3,9,4,9,99,3,9,101,3,9,9,4,9,99,3,9,1001,9,2,9,1002,9,5,9,101,5,9,9,1002,9,4,9,101,5,9,9,4,9,99,3,9,102,2,9,9,1001,9,5,9,102,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99]
+
+    let phasePermutations = permutations(xs: [5,6,7,8,9])
     
-    for psA in 0...4 {
-    for psB in 0...4 {
-    for psC in 0...4 {
-    for psD in 0...4 {
-    for psE in 0...4 {
-    
+    for phasePermutation in phasePermutations {
+        
+        let psA = phasePermutation[0]
+        let psB = phasePermutation[1]
+        let psC = phasePermutation[2]
+        let psD = phasePermutation[3]
+        let psE = phasePermutation[4]
+        
         var ampA = intcode
-        var ampAin = [psA, 0]
-        let ampAOut = run(intcode: ampA, input: ampAin)
-        
         var ampB = intcode
-        var ampBin = [psB, ampAOut.first!]
-        let ampBOut = run(intcode: ampB, input: ampBin)
-        
         var ampC = intcode
-        var ampCin = [psC, ampBOut.first!]
-        let ampCOut = run(intcode: ampC, input: ampCin)
-        
         var ampD = intcode
-        var ampDin = [psD, ampCOut.first!]
-        let ampDOut = run(intcode: ampD, input: ampDin)
-        
         var ampE = intcode
-        var ampEin = [psE, ampDOut.first!]
-        let ampEOut = run(intcode: ampE, input: ampEin)
         
-        if ampEOut.first! > maxThruster {
-            maxThruster = ampEOut.first!
+        var ampAipx = 0
+        var ampBipx = 0
+        var ampCipx = 0
+        var ampDipx = 0
+        var ampEipx = 0
+        
+        var input: Int? = 0
+        var lastOutput = 0
+        var count = 0
+        while input != nil {
+            print("Ran \(count)")
+            let ampAin = [psA, input!]
+            var ampAOut: [Int] = []
+            ampAipx = run(intcode: &ampA, input: ampAin, output: &ampAOut, ipx: ampAipx)
+            if ampAipx < 0 {
+                break
+            }
+            
+            let ampBin = [psB, ampAOut.removeFirst()]
+            var ampBOut: [Int] = []
+            ampBipx = run(intcode: &ampB, input: ampBin, output: &ampBOut, ipx: ampBipx)
+            if ampBipx < 0 {
+                break
+            }
+            
+            let ampCin = [psC, ampBOut.removeFirst()]
+            var ampCOut: [Int] = []
+            ampCipx = run(intcode: &ampC, input: ampCin, output: &ampCOut, ipx: ampCipx)
+            if ampCipx < 0 {
+                break
+            }
+            
+            let ampDin = [psD, ampCOut.removeFirst()]
+            var ampDOut: [Int] = []
+            ampDipx = run(intcode: &ampD, input: ampDin, output: &ampDOut, ipx: ampDipx)
+            if ampDipx < 0 {
+                break
+            }
+            
+            let ampEin = [psE, ampDOut.removeFirst()]
+            var ampEOut: [Int] = []
+            ampEipx = run(intcode: &ampE, input: ampEin, output: &ampEOut, ipx: ampEipx)
+            
+            input = ampEOut.removeFirst()
+            if let input = input {
+                lastOutput = input
+            }
+            count+=1
+        }
+        print(lastOutput)
+        if lastOutput > maxThruster {
+            maxThruster = lastOutput
             phase = [psA, psB, psC, psD, psE]
         }
-    }
-    }
-    }
-    }
+        
     }
     
     print("Max thrust of \(maxThruster) from \(phase)")
