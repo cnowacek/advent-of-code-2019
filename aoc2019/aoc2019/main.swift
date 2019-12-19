@@ -199,13 +199,12 @@ func execute(instruction: Instruction, pointer: Int, memory: inout [Int], input:
 }
 
 // Returns current pointer
-public func run(intcode: inout [Int], input: [Int], output: inout [Int], ipx: Int = 0) -> Int {
+public func run(intcode: inout [Int], input: inout [Int], output: inout [Int], ipx: Int = 0) -> Int {
     var ipx = ipx
-    var mInput = input
     var mOutput: [Int] = []
     while ipx >= 0 {
         let instruction = instructionAt(pointer: ipx, program: intcode)
-        ipx = execute(instruction: instruction, pointer: ipx, memory: &intcode, input: &mInput, output: &mOutput)
+        ipx = execute(instruction: instruction, pointer: ipx, memory: &intcode, input: &input, output: &mOutput)
         if let _ = mOutput.first {
             output.append(mOutput.removeFirst())
             return ipx
@@ -219,8 +218,8 @@ func day7() {
     
     var maxThruster = 0
     var phase: [Int] = []
-    let intcode = [3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5]
-    //let intcode: [Int] = [3,8,1001,8,10,8,105,1,0,0,21,46,67,76,101,118,199,280,361,442,99999,3,9,1002,9,4,9,1001,9,2,9,102,3,9,9,101,3,9,9,102,2,9,9,4,9,99,3,9,1001,9,3,9,102,2,9,9,1001,9,2,9,1002,9,3,9,4,9,99,3,9,101,3,9,9,4,9,99,3,9,1001,9,2,9,1002,9,5,9,101,5,9,9,1002,9,4,9,101,5,9,9,4,9,99,3,9,102,2,9,9,1001,9,5,9,102,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99]
+//    let intcode = [3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5]
+    let intcode: [Int] = [3,8,1001,8,10,8,105,1,0,0,21,46,67,76,101,118,199,280,361,442,99999,3,9,1002,9,4,9,1001,9,2,9,102,3,9,9,101,3,9,9,102,2,9,9,4,9,99,3,9,1001,9,3,9,102,2,9,9,1001,9,2,9,1002,9,3,9,4,9,99,3,9,101,3,9,9,4,9,99,3,9,1001,9,2,9,1002,9,5,9,101,5,9,9,1002,9,4,9,101,5,9,9,4,9,99,3,9,102,2,9,9,1001,9,5,9,102,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,99]
 
     let phasePermutations = permutations(xs: [5,6,7,8,9])
     
@@ -243,51 +242,61 @@ func day7() {
         var ampCipx = 0
         var ampDipx = 0
         var ampEipx = 0
-        
+
+        var ampAin: [Int] = [psA]
+        var ampBin: [Int] = [psB]
+        var ampCin: [Int] = [psC]
+        var ampDin: [Int] = [psD]
+        var ampEin: [Int] = [psE]
+
         var input: Int? = 0
         var lastOutput = 0
         var count = 0
         while input != nil {
-            print("Ran \(count)")
-            let ampAin = [psA, input!]
+//            print("Ran \(count)")
+
+            ampAin.append(lastOutput)
             var ampAOut: [Int] = []
-            ampAipx = run(intcode: &ampA, input: ampAin, output: &ampAOut, ipx: ampAipx)
-            if ampAipx < 0 {
+            ampAipx = run(intcode: &ampA, input: &ampAin, output: &ampAOut, ipx: ampAipx)
+            if ampAipx < 0 && ampAOut.isEmpty {
                 break
             }
-            
-            let ampBin = [psB, ampAOut.removeFirst()]
+
+            ampBin.append(ampAOut.removeFirst())
             var ampBOut: [Int] = []
-            ampBipx = run(intcode: &ampB, input: ampBin, output: &ampBOut, ipx: ampBipx)
-            if ampBipx < 0 {
+            ampBipx = run(intcode: &ampB, input: &ampBin, output: &ampBOut, ipx: ampBipx)
+            if ampBipx < 0  && ampBOut.isEmpty{
                 break
             }
-            
-            let ampCin = [psC, ampBOut.removeFirst()]
+
+            ampCin.append(ampBOut.removeFirst())
             var ampCOut: [Int] = []
-            ampCipx = run(intcode: &ampC, input: ampCin, output: &ampCOut, ipx: ampCipx)
-            if ampCipx < 0 {
+            ampCipx = run(intcode: &ampC, input: &ampCin, output: &ampCOut, ipx: ampCipx)
+            if ampCipx < 0  && ampCOut.isEmpty{
                 break
             }
-            
-            let ampDin = [psD, ampCOut.removeFirst()]
+
+            ampDin.append(ampCOut.removeFirst())
             var ampDOut: [Int] = []
-            ampDipx = run(intcode: &ampD, input: ampDin, output: &ampDOut, ipx: ampDipx)
-            if ampDipx < 0 {
+            ampDipx = run(intcode: &ampD, input: &ampDin, output: &ampDOut, ipx: ampDipx)
+            if ampDipx < 0  && ampDOut.isEmpty{
                 break
             }
-            
-            let ampEin = [psE, ampDOut.removeFirst()]
+
+            ampEin.append(ampDOut.removeFirst())
             var ampEOut: [Int] = []
-            ampEipx = run(intcode: &ampE, input: ampEin, output: &ampEOut, ipx: ampEipx)
-            
+            ampEipx = run(intcode: &ampE, input: &ampEin, output: &ampEOut, ipx: ampEipx)
+            if ampEipx < 0  && ampEOut.isEmpty{
+                break
+            }
+
             input = ampEOut.removeFirst()
             if let input = input {
                 lastOutput = input
             }
             count+=1
         }
-        print(lastOutput)
+//        print(lastOutput)
         if lastOutput > maxThruster {
             maxThruster = lastOutput
             phase = [psA, psB, psC, psD, psE]
