@@ -10,6 +10,7 @@
 		C5D7709323A34AE500C7BA1B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D7709223A34AE500C7BA1B /* main.swift */; };
 		C5D7709A23A34EEE00C7BA1B /* Permutations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D7709923A34EEE00C7BA1B /* Permutations.swift */; };
 		C5F6466B23AC3E3C00BABF2D /* day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6466A23AC3E3C00BABF2D /* day7.swift */; };
+		C5F6466D23AD749C00BABF2D /* day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6466C23AD749C00BABF2D /* day8.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		C5D7709223A34AE500C7BA1B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C5D7709923A34EEE00C7BA1B /* Permutations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permutations.swift; sourceTree = "<group>"; };
 		C5F6466A23AC3E3C00BABF2D /* day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day7.swift; sourceTree = "<group>"; };
+		C5F6466C23AD749C00BABF2D /* day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day8.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				C5D7709223A34AE500C7BA1B /* main.swift */,
 				C5D7709923A34EEE00C7BA1B /* Permutations.swift */,
 				C5F6466A23AC3E3C00BABF2D /* day7.swift */,
+				C5F6466C23AD749C00BABF2D /* day8.swift */,
 			);
 			path = aoc2019;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 				C5D7709A23A34EEE00C7BA1B /* Permutations.swift in Sources */,
 				C5F6466B23AC3E3C00BABF2D /* day7.swift in Sources */,
 				C5D7709323A34AE500C7BA1B /* main.swift in Sources */,
+				C5F6466D23AD749C00BABF2D /* day8.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
